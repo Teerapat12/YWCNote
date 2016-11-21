@@ -1,0 +1,91 @@
+
+#list_box{
+
+    border-right: 2px double #aaaaaa;
+
+    padding:7px;
+    height:700px;
+    color: #444444;
+}
+
+
+
+#creation_box{
+    border-left: 20px black;
+    color:red;
+    border : 50px;
+    height:700px;
+}
+
+.right{
+    float: right !important;
+    padding: 10px;
+}
+
+.menuoption{
+    margin-top:10px !important;
+    padding:10px !important;
+}
+
+.sortbytext{
+    margin-left:12px;
+
+}
+
+.addbutton{
+    margin-top:10px;
+    margin-right:10px;
+    border-radius: 40px;
+    width:40px;
+    height:40px;
+}
+
+.searchbox{
+    margin-bottom:12px;
+}
+
+.noteHeader h5 {
+    margin-bottom: 2px !important;
+
+}
+
+.noteHeader p{
+    margin-bottom: 8px !important;
+}
+
+
+.noteHeader{
+    border-bottom:1px solid #222222;
+}
+
+.notelist{
+    color:#444444 !important; /* Not Working*/
+    height:100%;
+    overflow-y:scroll;
+    padding:8px;
+}
+
+
+.note{
+    overflow:hidden;
+    height:150px;
+    line-height: 124%;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.note:hover{
+    background-color:rgba(93, 115, 179, 0.3)
+}
+
+.selectednote{
+    border:3px outset #5260a7;
+}
+.deletebutton{
+    margin-bottom:50px;
+    z-index: 2;
+}
+
+.deletebutton:hover{
+    color:	#008800;
+}
