@@ -7,21 +7,31 @@ import NoMatch from './component/NoMatch';
 import Landing from './component/landing/Landing';
 import DefaultTemplate from './DefaultTemplate';
 import NotePage from './component/note/NotePage.js';
+import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers/index';
+
+
+
+
+var store = createStore(reducers)
 
 export default class App extends React.Component {
 	render() {
 		return (
-
-			<Router history={hashHistory}>
-				<Route path="/" component={DefaultTemplate}>gy
-					{/*<IndexRedirect to="/note" />*/}
-					<Route path="note/:id" component={NotePage}/>
-					<Route path="note" component={NotePage}/>
-					<Route path="nomatch" component={NoMatch}/>
-					{/*<Route path="/user/:userId" component={NoMatch}/>*/}
-					<Route path="*" component={NoMatch}/>
-				</Route>
-			</Router>
+			<Provider store={store}>
+				<Router history={hashHistory}>
+					<Route path="/" component={DefaultTemplate}>
+						{/*<IndexRedirect to="/note" />*/}
+						<Route path="note/:id" component={NotePage}/>
+						<Route path="note" component={NotePage}/>
+						<Route path="nomatch" component={NoMatch}/>
+						{/*<Route path="/user/:userId" component={NoMatch}/>*/}
+						<Route path="*" component={NoMatch}/>
+					</Route>
+				</Router>
+			</Provider>
 
 		)
 	}

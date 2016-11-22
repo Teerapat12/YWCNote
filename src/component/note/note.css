@@ -89,3 +89,26 @@
 .deletebutton:hover{
     color:	#008800;
 }
+
+.notecreationbox{
+    height:100%;
+    margin-right:20px;
+    margin-top:25px;
+}
+
+.noteTitleText{
+    display:inline;
+
+}
+
+.placeHolderDiv{
+    background-color:rgb(125,125,220);
+    height:500px;
+    margin-right:20px;
+    margin-top:25px;
+}
+
+.savebutton{
+    margin-right:20px;
+    margin-bottom:10px;
+}

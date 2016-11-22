@@ -4,28 +4,32 @@
 import React, { Component } from 'react';
 import NoteItem from './NoteItem';
 import styles from './note.css';
+import {connect} from 'react-redux';
+import {selectNote} from '../../actions/noteController';
+
 
 class NoteList extends Component {
 	render() {
-		var sampleNoteObj = {
-			noteTitle: 'My First Note',
-			noteDetail: 'This is my first note, bla bla blu bepi spdjafp ajsdfpoajs dpfja sdopfjasdpof jaspodfasfasdfasdfas'
-		};
+		var noteList = this.props.noteList;
 		return (
 			<div className={styles.notelist}>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj} selected/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
-				<NoteItem note={sampleNoteObj}/>
+				{noteList.map((note,index)=>{
+					if(index!=this.props.selectedNoteId)
+						return <NoteItem note={note} key={index} noteIndex={index} />;
+					else
+						return <NoteItem note={note} key={index} noteIndex={index} selected/>;
+				})}
+
 			</div>
 		);
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		selectedNoteId: state.note.selectedNoteId,
+		noteList: state.note.noteList
+	};
+}
 
-export default NoteList;
+export default connect(mapStateToProps)(NoteList);

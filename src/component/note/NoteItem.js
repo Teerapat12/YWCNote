@@ -5,44 +5,60 @@ import React, { Component } from 'react';
 import styles from './note.css';
 import {Panel} from 'react-bootstrap';
 var Confirm = require('react-confirm-bootstrap');
+import {connect} from 'react-redux';
+import {selectNote,deleteNote} from '../../actions/noteController';
+
 
 class NoteItem extends Component {
-	handleClick(){
-		alert("I have been clicked XD ");
+
+	handleClick(e){
+		this.props.selectNote(this.props.noteIndex);
 	}
 
-	onConfirm(){
-		console.log("CONFIRM!");
+	onConfirm(e){
+		//Delete Note
+		this.props.deleteNote(this.props.noteIndex);
 	}
+
+
+
 
 	render() {
-		console.log(this.props.selected);
 		var panelClassName = styles.note;
 		if(this.props.selected){
 			panelClassName+=" "+styles.selectednote;
 		}
+		var {noteTitle,noteDetail} = this.props.note;
+
 		return (
-			<Panel onClick={ this.handleClick } className={panelClassName} >
-				<div className={styles.noteHeader}>
-					<Confirm
-						onConfirm={this.onConfirm}
-						body="Are you sure you want to delete this?"
-						confirmText="Confirm Delete"
-						title="Deleting Stuff">
-						<a className={"pull-right text-success "+styles.deletebutton} ><span className="glyphicon glyphicon-trash" ></span></a>
-					</Confirm>
-					<h5>Note Title!</h5>
-					<p>recently</p>
+			<Panel  className={panelClassName} id="noteItemPanel">
+				<Confirm
+					onConfirm={this.onConfirm.bind(this)}
+					body="Are you sure you want to delete this?"
+					confirmText="Confirm Delete"
+					title="Deleting Stuff">
+					<a className={"pull-right text-success "+styles.deletebutton} ><span id="deletebutton" className="glyphicon glyphicon-trash" ></span></a>
+				</Confirm>
+
+				<div className={styles.noteHeader} onClick={ this.handleClick.bind(this) }>
+
+					<h5>{noteTitle}</h5>
+					<p>recently!</p>
+					<p>{this.props.note.selectedNoteId}</p>
 
 				</div>
-				<div className="noteBody">
-					Basic panel examf ad sfa dsfas dfap leasd fgadfa fasd fasdfasdf asdf f asdf asdfds afads fasd fasd fasd fasd fdas fsdafa sdf asd fasdfas dfasdfasd
-					fads fadsf asdfasdfasdf sdafasd fasdfasdfa sdfasdasdfads fads fas afd fdsa fasd fasd fadsfadsfasdfad sfads fads asdf
+				<div className="noteBody" onClick={ this.handleClick.bind(this) } >
+					{ this.props.note.noteDetail.replace(/<\/?[^>]+(>|$)/g, "")}
 				</div>
 			</Panel>
 		);
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		noteList: state.note
+	};
+}
 
-export default NoteItem;
+export default connect(mapStateToProps,{selectNote,deleteNote})(NoteItem);
