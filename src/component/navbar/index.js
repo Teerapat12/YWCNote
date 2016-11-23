@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import styles from './navbar.css'
 import {Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
+import ModalMenu from '../modal/modalMenu';
 
 class NavBar extends Component{
 
@@ -33,7 +34,7 @@ class NavBar extends Component{
 						<NavItem eventKey={2} href="#">Login</NavItem>
 					</Nav>
 				</Navbar.Collapse>
-
+				<ModalMenu/>
 			</Navbar>
 		)
 	}

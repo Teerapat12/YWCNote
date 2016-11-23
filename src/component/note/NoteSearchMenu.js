@@ -2,8 +2,11 @@
  * Created by Teerapat on 11/21/2016.
  */
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {openModal} from '../../actions/modalController';
 import {FormControl,FormGroup,DropdownButton,MenuItem ,Button} from 'react-bootstrap';
 import styles from './note.css';
+
 class NoteSearchMenu extends Component {
 	render() {
 		return (
@@ -21,7 +24,7 @@ class NoteSearchMenu extends Component {
 						<MenuItem eventKey="5">Show Text <i className={styles.right+" fa fa-check "} aria-hidden="true" ></i></MenuItem>
 					</DropdownButton>
 
-					<Button className={styles.right+" "+styles.addbutton} bsStyle={'success'} ><i className="fa fa-plus" aria-hidden="true"></i></Button>
+					<Button className={styles.right+" "+styles.addbutton} bsStyle={'success'} onClick={()=>this.props.openModal('addNote')}><i className="fa fa-plus" aria-hidden="true"></i></Button>
 				</FormGroup>
 				<hr/>
 			</div>
@@ -29,5 +32,5 @@ class NoteSearchMenu extends Component {
 	}
 }
 
+export default connect(null,{openModal})(NoteSearchMenu);
 
-export default NoteSearchMenu;
