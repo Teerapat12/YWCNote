@@ -1,7 +1,7 @@
 /**
  * Created by Teerapat on 11/22/2016.
  */
-import {NOTE_SELECTED,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE} from './types';
+import {NOTE_SELECTED,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_ADD} from './types';
 
 export function selectNote(id){
 
@@ -31,5 +31,14 @@ export function deleteNote(index){
 	return{
 		type:NOTE_DELETE,
 		payload:index
+	}
+}
+
+
+export function addNote(noteTitle){
+	console.log("TEST");
+	return{
+		type:NOTE_ADD,
+		payload:noteTitle
 	}
 }

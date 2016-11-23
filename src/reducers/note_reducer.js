@@ -1,7 +1,7 @@
 /**
  * Created by Teerapat on 11/22/2016.
  */
-import {NOTE_SELECTED,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE} from '../actions/types'
+import {NOTE_SELECTED,NOTE_ADD,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE} from '../actions/types'
 
 const initialState ={
 	selectedNoteId:-1,
@@ -75,6 +75,21 @@ export default function(state=initialState,action){
 
 				newObj.selectedNoteId = -1;
 			}
+			return newObj;
+
+		case NOTE_ADD:
+			var newObj = JSON.parse(JSON.stringify(state));
+			//Add New Note
+			var newNote = {
+				noteTitle:action.payload,
+				noteDetail:'',
+				createdDate:Date.now(),
+				updatedDate: Date.now()
+			}
+			newObj.noteList.push(newNote);
+			newObj.selectedNoteId = newObj.noteList.length-1;
+			newObj.editingNote = newNote;
+			console.log(newObj);
 			return newObj;
 
 		//Set to 'none' instead of '' so that we can avoid loading modal at the start. Reducing loading time

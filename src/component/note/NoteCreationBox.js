@@ -51,6 +51,7 @@ class NoteCreationBox extends Component {
 				<Button onClick={()=>this.props.saveNote()} bsStyle="success"  className={styles.savebutton+" "+styles.right}>Save Note</Button>
 
 			<RichTextEditor
+
 				value={this.state.value}
 				onChange={this.onChange.bind(this)}
 				className={styles.notecreationbox}
