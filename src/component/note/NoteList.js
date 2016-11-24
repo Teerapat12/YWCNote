@@ -5,10 +5,20 @@ import React, { Component } from 'react';
 import NoteItem from './NoteItem';
 import styles from './note.css';
 import {connect} from 'react-redux';
-import {selectNote} from '../../actions/noteController';
-
+import {openModal} from '../../actions/modalController';
+import {Button} from 'react-bootstrap';
 
 class NoteList extends Component {
+
+	renderPlaceHolder(){
+		return(
+			<div className={styles.emptynoteplaceholder}>
+				<p>You have no note yet. Try adding new note!</p>
+				<hr/>
+				<Button bsStyle="success" className={styles.emptynoteaddbutton} onClick={()=>this.props.openModal('addNote')} block>Add new Note</Button>
+			</div>
+		)
+	}
 
 	render() {
 
@@ -20,7 +30,7 @@ class NoteList extends Component {
 						return <NoteItem note={note} key={index} noteIndex={index} />;
 					else
 						return <NoteItem note={note} key={index} noteIndex={index} selected/>;
-				}) : <div>Loading</div>}
+				}) : this.renderPlaceHolder()}
 
 			</div>
 		);
@@ -34,4 +44,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(NoteList);
+export default connect(mapStateToProps,{openModal})(NoteList);

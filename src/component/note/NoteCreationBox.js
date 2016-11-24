@@ -7,6 +7,9 @@ import RichTextEditor from 'react-rte';
 import {connect} from 'react-redux';
 import {editNote,saveNote} from '../../actions/noteController';
 import {Button} from 'react-bootstrap';
+import InlineEdit from 'react-edit-inline';
+
+
 
 class NoteCreationBox extends Component {
 	static propTypes = {
@@ -14,7 +17,8 @@ class NoteCreationBox extends Component {
 	};
 
 	state = {
-		value: RichTextEditor.createEmptyValue()
+		value: RichTextEditor.createEmptyValue(),
+		message:'test'
 	}
 
 	componentDidUpdate(prevProps){
@@ -41,22 +45,43 @@ class NoteCreationBox extends Component {
 		}
 	};
 
+	dataChanged(data) {
+		// data = { description: "New validated text comes here" }
+		// Update your model from here
+		console.log(data);
+		this.setState({message:data.message})
+	}
+
+	customValidateText(text) {
+		return (text.length > 0 && text.length < 64);
+	}
+
 
 	render() {
 		if(this.props.selectedNoteId!=-1)
 			return (
-			<div>
-				<h2 className={styles.noteTitleText}>{this.props.editingNote.noteTitle}</h2>
-				<Button onClick={()=>this.props.saveNote()} bsStyle="success"  className={styles.savebutton+" "+styles.right}>Save Note</Button>
+				<div>
+					<h2 className={styles.noteTitleText}>{this.props.editingNote.noteTitle}</h2>
 
-			<RichTextEditor
+					<InlineEdit
+						validate={this.customValidateText.bind(this)}
+						activeClassName="editing"
+						text={this.state.message}
+						paramName="message"
+						change={this.dataChanged.bind(this)}
+					/>
 
-				value={this.state.value}
-				onChange={this.onChange.bind(this)}
-				className={styles.notecreationbox}
-			/>
+					<Button onClick={()=>this.props.saveNote()} bsStyle="success"  className={styles.savebutton+" "+styles.right}>Save Note</Button>
+					<div className={styles.notecreationbox}
+					>
+						<RichTextEditor
+							value={this.state.value}
+							placeholder={"Type your note here."}
+							onChange={this.onChange.bind(this)}
+						/>
+					</div>
 				</div>
-		);
+			);
 		else{
 			return(
 				<div className={styles.placeHolderDiv}>

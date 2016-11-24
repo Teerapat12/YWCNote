@@ -120,3 +120,16 @@
     color:darkgray;
     margin-top:20px;
 }
+
+
+.emptynoteplaceholder{
+    padding:20px;
+    margin-top:20px;
+    text-align:center;
+    font-family:roboto, sans-serif;
+    color:grey;
+}
+
+.emptynoteaddbutton{
+    margin-top:25px;
+}
