@@ -13,9 +13,9 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/index';
 import {NOTE_LOAD} from './actions/types';
 
-
-
-var store = createStore(reducers)
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+// var store = createStore(reducers)
+const store = createStoreWithMiddleware(reducers);
 
 store.dispatch({
 	type:NOTE_LOAD,

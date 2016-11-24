@@ -84,7 +84,10 @@
 .deletebutton{
     margin-bottom:50px;
     z-index: 2;
+
 }
+
+
 
 .deletebutton:hover{
     color:	#008800;
@@ -103,7 +106,8 @@
 }
 
 .placeHolderDiv{
-    background-color:rgb(125,125,220);
+    /*background-color:rgb(125,125,220);*/
+    background-color:#4d5d9d;
     height:500px;
     margin-right:20px;
     margin-top:25px;
@@ -132,4 +136,6 @@
 
 .emptynoteaddbutton{
     margin-top:25px;
+
 }
+

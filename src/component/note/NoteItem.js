@@ -42,8 +42,6 @@ class NoteItem extends Component {
 		var updatedDate = new Date(updatedDate);
 		var updatedSince = ((new Date()).getTime() - updatedDate.getTime())/1000;
 		var timeString = "";
-		console.log("In minutes : "+(updatedSince/60));
-		console.log(updatedSince);
 		if(updatedSince > (3600)) { //More than Hour
 			var hour = parseInt(updatedSince / 3600);
 			if(hour>1)
@@ -72,7 +70,7 @@ class NoteItem extends Component {
 					body="Are you sure you want to delete this?"
 					confirmText="Confirm Delete"
 					title="Deleting Stuff">
-					<a className={"pull-right text-success "+styles.deletebutton} ><span id="deletebutton" className="glyphicon glyphicon-trash" ></span></a>
+					<a className={"pull-right  "+styles.deletebutton} ><span id="deletebutton" className="glyphicon glyphicon-trash" ></span></a>
 				</Confirm>
 
 				<div className={styles.noteHeader} >

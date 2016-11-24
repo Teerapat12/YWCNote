@@ -37,7 +37,7 @@ class NoteSearchMenu extends Component {
 						<MenuItem eventKey="5">Show Text <i className={styles.right+" fa fa-check "} aria-hidden="true" ></i></MenuItem>
 					</DropdownButton>
 
-					<Button className={styles.right+" "+styles.addbutton} bsStyle={'success'} onClick={()=>this.props.openModal('addNote')}><i className="fa fa-plus" aria-hidden="true"></i></Button>
+					<Button className={styles.right+" "+styles.addbutton} bsStyle={'primary'} onClick={()=>this.props.openModal('addNote')}><i className="fa fa-plus" aria-hidden="true"></i></Button>
 				</FormGroup>
 				<hr/>
 			</div>

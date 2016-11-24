@@ -15,7 +15,7 @@ class NoteList extends Component {
 			<div className={styles.emptynoteplaceholder}>
 				<p>You have no note yet. Try adding new note!</p>
 				<hr/>
-				<Button bsStyle="success" className={styles.emptynoteaddbutton} onClick={()=>this.props.openModal('addNote')} block>Add new Note</Button>
+				<Button bsStyle="primary" className={styles.emptynoteaddbutton} onClick={()=>this.props.openModal('addNote')} block>Add new Note</Button>
 			</div>
 		)
 	}

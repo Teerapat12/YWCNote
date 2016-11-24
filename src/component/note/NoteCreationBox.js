@@ -5,10 +5,10 @@ import React, { Component ,PropTypes} from 'react';
 import styles from './note.css';
 import RichTextEditor from 'react-rte';
 import {connect} from 'react-redux';
-import {editNote,saveNote} from '../../actions/noteController';
+import {editNote,editTitle,saveNote} from '../../actions/noteController';
 import {Button} from 'react-bootstrap';
 import InlineEdit from 'react-edit-inline';
-
+import Spinner from 'react-spinkit';
 
 
 class NoteCreationBox extends Component {
@@ -18,7 +18,7 @@ class NoteCreationBox extends Component {
 
 	state = {
 		value: RichTextEditor.createEmptyValue(),
-		message:'test'
+		message:this.props.editingNote.noteTitle
 	}
 
 	componentDidUpdate(prevProps){
@@ -48,30 +48,55 @@ class NoteCreationBox extends Component {
 	dataChanged(data) {
 		// data = { description: "New validated text comes here" }
 		// Update your model from here
-		console.log(data);
 		this.setState({message:data.message})
 	}
 
 	customValidateText(text) {
-		return (text.length > 0 && text.length < 64);
+		if(text.length>0 && text.length< 64) {
+			//Save NOTE HERE
+			this.props.editTitle(text);
+			return true;
+		}
+		else{
+			if(text.length==0){
+				alert("Please enter a title for your note");
+			}
+			else{
+				alert("Too long note title.");
+			}
+			return false;
+		}
+
+
 	}
 
 
 	render() {
+
+
 		if(this.props.selectedNoteId!=-1)
 			return (
 				<div>
-					<h2 className={styles.noteTitleText}>{this.props.editingNote.noteTitle}</h2>
+					<h2 className={styles.noteTitleText}>
+						<InlineEdit
+							validate={this.customValidateText.bind(this)}
+							activeClassName="editing"
+							text={this.props.editingNote.noteTitle}
+							paramName="message"
+							change={this.dataChanged.bind(this)}
+						/>
 
-					<InlineEdit
-						validate={this.customValidateText.bind(this)}
-						activeClassName="editing"
-						text={this.state.message}
-						paramName="message"
-						change={this.dataChanged.bind(this)}
-					/>
+					</h2>
+					{/*<h2 className={styles.noteTitleText}>{this.props.editingNote.noteTitle}</h2>*/}
 
-					<Button onClick={()=>this.props.saveNote()} bsStyle="success"  className={styles.savebutton+" "+styles.right}>Save Note</Button>
+					{/*<InlineEdit*/}
+						{/*validate={this.customValidateText.bind(this)}*/}
+						{/*activeClassName="editing"*/}
+						{/*text={this.state.message}*/}
+						{/*paramName="message"*/}
+						{/*change={this.dataChanged.bind(this)}*/}
+					{/*/>*/}
+					<Button onClick={()=>this.props.saveNote()} bsStyle="primary"  className={styles.savebutton+" "+styles.right} active={this.props.isLoading}>{this.props.isLoading? <Spinner spinnerName="three-bounce" className="notespinner" noFadeIn/>:"Save Note"}</Button>
 					<div className={styles.notecreationbox}
 					>
 						<RichTextEditor
@@ -96,9 +121,10 @@ class NoteCreationBox extends Component {
 function mapStateToProps(state) {
 	return {
 		editingNote:state.note.editingNote,
-		selectedNoteId:state.note.selectedNoteId
+		selectedNoteId:state.note.selectedNoteId,
+		isLoading:state.note.loading_note
 	};
 }
 
 
-export default connect(mapStateToProps,{editNote,saveNote})(NoteCreationBox);
+export default connect(mapStateToProps,{editNote,saveNote,editTitle})(NoteCreationBox);
