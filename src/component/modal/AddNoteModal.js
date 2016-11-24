@@ -55,8 +55,9 @@ class AddNoteModal extends Component{
 
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={this.addingNote.bind(this)}>Add</Button>
 					<Button onClick={this.props.close}>Close</Button>
+					<Button onClick={this.addingNote.bind(this)} bsStyle={"success"}>Add</Button>
+
 				</Modal.Footer>
 			</Modal>
 				</div>

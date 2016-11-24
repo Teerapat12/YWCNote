@@ -11,13 +11,22 @@ import {selectNote,deleteNote} from '../../actions/noteController';
 
 class NoteItem extends Component {
 
-	handleClick(e){
-		this.props.selectNote(this.props.noteIndex);
-	}
+
 
 	onConfirm(e){
 		//Delete Note
 		this.props.deleteNote(this.props.noteIndex);
+	}
+
+	handleAllClick(e){
+		if(e.target.id=='deletebutton'){
+			e.stopPropagation();
+		}
+		else{
+			this.props.selectNote(this.props.noteIndex);
+		}
+
+
 	}
 
 
@@ -57,7 +66,7 @@ class NoteItem extends Component {
 				timeString = " moments ago";
 		}
 		return (
-			<Panel  className={panelClassName} id="noteItemPanel">
+			<Panel  className={panelClassName} id="noteItemPanel" onClick={this.handleAllClick.bind(this)}>
 				<Confirm
 					onConfirm={this.onConfirm.bind(this)}
 					body="Are you sure you want to delete this?"
@@ -66,14 +75,14 @@ class NoteItem extends Component {
 					<a className={"pull-right text-success "+styles.deletebutton} ><span id="deletebutton" className="glyphicon glyphicon-trash" ></span></a>
 				</Confirm>
 
-				<div className={styles.noteHeader} onClick={ this.handleClick.bind(this) }>
+				<div className={styles.noteHeader} >
 
 					<h5>{noteTitle}</h5>
 					<p>{timeString}</p>
 					<p>{selectedNoteId}</p>
 
 				</div>
-				<div className="noteBody" onClick={ this.handleClick.bind(this) } >
+				<div className="noteBody">
 
 					{ noteDetail.length>0? noteDetail.replace(/<\/?[^>]+(>|$)/g, ""): <p className={styles.noteItemPlaceHolder}></p>}
 
