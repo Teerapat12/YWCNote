@@ -9,16 +9,18 @@ import {selectNote} from '../../actions/noteController';
 
 
 class NoteList extends Component {
+
 	render() {
+
 		var noteList = this.props.noteList;
 		return (
 			<div className={styles.notelist}>
-				{noteList.map((note,index)=>{
+				{noteList.length>0? noteList.map((note,index)=>{
 					if(index!=this.props.selectedNoteId)
 						return <NoteItem note={note} key={index} noteIndex={index} />;
 					else
 						return <NoteItem note={note} key={index} noteIndex={index} selected/>;
-				})}
+				}) : <div>Loading</div>}
 
 			</div>
 		);

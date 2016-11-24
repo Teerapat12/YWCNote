@@ -28,8 +28,34 @@ class NoteItem extends Component {
 		if(this.props.selected){
 			panelClassName+=" "+styles.selectednote;
 		}
-		var {noteTitle,noteDetail} = this.props.note;
-
+		var {noteTitle,noteDetail,createdDate,selectedNoteId,updatedDate} = this.props.note;
+		var createdDate = new Date(createdDate);
+		var updatedDate = new Date(updatedDate);
+		var updatedSince = ((new Date()).getTime() - updatedDate.getTime())/1000;
+		var timeString = "";
+		console.log("In minutes : "+(updatedSince/60));
+		console.log(updatedSince);
+		if(updatedSince > (3600)) { //More than Hour
+			var hour = parseInt(updatedSince / 3600);
+			if(hour>1)
+				timeString = hour+ " hours ago";
+			else
+				timeString = hour+" hour ago";
+		}
+		else if(updatedSince >60){
+			var minute = parseInt(updatedSince / 60);
+			if(minute>1)
+				timeString = minute + " minutes ago";
+			else
+				timeString = minute + " minute ago";
+		}
+		else{
+			if(updatedSince>30){
+				timeString = " recently";
+			}
+			else
+				timeString = " moments ago";
+		}
 		return (
 			<Panel  className={panelClassName} id="noteItemPanel">
 				<Confirm
@@ -43,13 +69,16 @@ class NoteItem extends Component {
 				<div className={styles.noteHeader} onClick={ this.handleClick.bind(this) }>
 
 					<h5>{noteTitle}</h5>
-					<p>recently!</p>
-					<p>{this.props.note.selectedNoteId}</p>
+					<p>{timeString}</p>
+					<p>{selectedNoteId}</p>
 
 				</div>
 				<div className="noteBody" onClick={ this.handleClick.bind(this) } >
-					{ this.props.note.noteDetail.replace(/<\/?[^>]+(>|$)/g, "")}
+
+					{ noteDetail.length>0? noteDetail.replace(/<\/?[^>]+(>|$)/g, ""): <p className={styles.noteItemPlaceHolder}></p>}
+
 				</div>
+
 			</Panel>
 		);
 	}

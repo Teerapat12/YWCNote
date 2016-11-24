@@ -46,7 +46,6 @@ class NoteCreationBox extends Component {
 		if(this.props.selectedNoteId!=-1)
 			return (
 			<div>
-
 				<h2 className={styles.noteTitleText}>{this.props.editingNote.noteTitle}</h2>
 				<Button onClick={()=>this.props.saveNote()} bsStyle="success"  className={styles.savebutton+" "+styles.right}>Save Note</Button>
 

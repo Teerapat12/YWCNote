@@ -36,7 +36,6 @@ export function deleteNote(index){
 
 
 export function addNote(noteTitle){
-	console.log("TEST");
 	return{
 		type:NOTE_ADD,
 		payload:noteTitle

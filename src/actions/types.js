@@ -15,3 +15,5 @@ export const OPEN_MODAL ='open_modal';
 export const CLOSE_MODAL = 'close_modal';
 
 export const NOTE_ADD ='note_add';
+
+export const NOTE_LOAD = 'note_load';

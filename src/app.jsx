@@ -11,14 +11,22 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/index';
-
+import {NOTE_LOAD} from './actions/types';
 
 
 
 var store = createStore(reducers)
 
+store.dispatch({
+	type:NOTE_LOAD,
+	payload:localStorage.getItem('notes')
+
+})
+
 export default class App extends React.Component {
+
 	render() {
+
 		return (
 			<Provider store={store}>
 				<Router history={hashHistory}>

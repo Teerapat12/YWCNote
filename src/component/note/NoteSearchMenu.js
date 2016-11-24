@@ -8,12 +8,25 @@ import {FormControl,FormGroup,DropdownButton,MenuItem ,Button} from 'react-boots
 import styles from './note.css';
 
 class NoteSearchMenu extends Component {
+
+	constructor(props){
+		super(props);
+		this.state = {
+			query:''
+		}
+	}
+
+	handleChange(e){
+		this.setState({query:e.target.value});
+		//Reload Note by search filter
+	}
+
 	render() {
 		return (
 			<div>
 				<FormGroup>
 
-					<FormControl type="text" className={styles.searchbox} placeholder="Search" />
+					<FormControl type="text" value={this.state.query} onChange={this.handleChange.bind(this)} className={styles.searchbox} placeholder="Search" />
 					<DropdownButton bsSize="small" title="Options   " id={styles.menuoption+" bg-vertical-dropdown-2"} noCaret className={styles.right+" "+styles.menuoption}>
 						<h5 className={styles.sortbytext}>Sort By</h5>
 						<MenuItem eventKey="1">Created Date (Ascending)</MenuItem>
