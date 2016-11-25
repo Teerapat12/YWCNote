@@ -31,7 +31,7 @@ export default class App extends React.Component {
 			<Provider store={store}>
 				<Router history={hashHistory}>
 					<Route path="/" component={DefaultTemplate}>
-						{/*<IndexRedirect to="/note" />*/}
+						<IndexRoute component={Landing}/>
 						<Route path="note/:id" component={NotePage}/>
 						<Route path="note" component={NotePage}/>
 						<Route path="nomatch" component={NoMatch}/>
