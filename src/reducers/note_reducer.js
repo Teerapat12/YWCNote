@@ -1,7 +1,7 @@
 /**
  * Created by Teerapat on 11/22/2016.
  */
-import {NOTE_SELECTED,NOTE_ADD,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_LOAD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD} from '../actions/types'
+import {NOTE_SELECTED,NOTE_ADD,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_LOAD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD,NOTE_SEARCH} from '../actions/types'
 
 const initialState ={
 	selectedNoteId:-1,
@@ -39,7 +39,8 @@ const initialState ={
 		noteTitle:'',
 		noteDetail:''
 	},
-	loading_note:false
+	loading_note:false,
+	note_query:''
 };
 
 export default function(state=initialState,action){
@@ -119,6 +120,11 @@ export default function(state=initialState,action){
 		case NOTE_FINLOAD:
 			var newObj = JSON.parse(JSON.stringify(state));
 			newObj.loading_note = false;
+			return newObj;
+
+		case NOTE_SEARCH:
+			var newObj = JSON.parse(JSON.stringify(state));
+			newObj.note_query = action.payload;
 			return newObj;
 
 		//Set to 'none' instead of '' so that we can avoid loading modal at the start. Reducing loading time

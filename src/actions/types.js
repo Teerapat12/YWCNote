@@ -23,3 +23,5 @@ export const NOTE_EDITTITLE = 'edit_title';
 export const NOTE_STARTLOAD = 'note_start_load';
 
 export const NOTE_FINLOAD = 'note_finish_load';
+
+export const NOTE_SEARCH = 'note_search';

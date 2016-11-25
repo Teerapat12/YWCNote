@@ -76,11 +76,11 @@ class NoteItem extends Component {
 				<div className={styles.noteHeader} >
 
 					<h5>{noteTitle}</h5>
-					<p>{timeString}</p>
+					<p><i className="fa fa-clock-o" aria-hidden="true"></i>   {timeString}</p>
 					<p>{selectedNoteId}</p>
 
 				</div>
-				<div className="noteBody">
+				<div className={styles.noteBody}>
 
 					{ noteDetail.length>0? noteDetail.replace(/<\/?[^>]+(>|$)/g, ""): <p className={styles.noteItemPlaceHolder}></p>}
 

@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {openModal} from '../../actions/modalController';
+import {search_change} from '../../actions/noteController';
 import {FormControl,FormGroup,DropdownButton,MenuItem ,Button} from 'react-bootstrap';
 import styles from './note.css';
 
@@ -17,16 +18,17 @@ class NoteSearchMenu extends Component {
 	}
 
 	handleChange(e){
-		this.setState({query:e.target.value});
-		//Reload Note by search filter
+		this.props.search_change(e.target.value);
 	}
+
+
 
 	render() {
 		return (
 			<div>
 				<FormGroup>
 
-					<FormControl type="text" value={this.state.query} onChange={this.handleChange.bind(this)} className={styles.searchbox} placeholder="Search" />
+					<FormControl type="search" value={this.props.note_query} onChange={this.handleChange.bind(this)} className={styles.searchbox} placeholder="Search" />
 					<DropdownButton bsSize="small" title="Options   " id={styles.menuoption+" bg-vertical-dropdown-2"} noCaret className={styles.right+" "+styles.menuoption}>
 						<h5 className={styles.sortbytext}>Sort By</h5>
 						<MenuItem eventKey="1">Created Date (Ascending)</MenuItem>
@@ -45,5 +47,12 @@ class NoteSearchMenu extends Component {
 	}
 }
 
-export default connect(null,{openModal})(NoteSearchMenu);
+
+function mapStateToProps(state) {
+	return {
+		note_query:state.note.note_query
+	};
+}
+
+export default connect(mapStateToProps,{openModal,search_change})(NoteSearchMenu);
 

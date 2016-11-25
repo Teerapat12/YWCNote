@@ -20,16 +20,27 @@ class NoteList extends Component {
 		)
 	}
 
+	shouldRenderNote(note){
+		var query =  this.props.note_query;
+		var {noteTitle,noteDetail} = note;
+		return (noteTitle.includes(query))||(noteDetail.includes(query));
+	}
+
 	render() {
 
 		var noteList = this.props.noteList;
 		return (
 			<div className={styles.notelist}>
 				{noteList.length>0? noteList.map((note,index)=>{
-					if(index!=this.props.selectedNoteId)
-						return <NoteItem note={note} key={index} noteIndex={index} />;
-					else
-						return <NoteItem note={note} key={index} noteIndex={index} selected/>;
+					if(this.shouldRenderNote(note)) {
+						if (index != this.props.selectedNoteId)
+							return <NoteItem note={note} key={index} noteIndex={index}/>;
+						else
+							return <NoteItem note={note} key={index} noteIndex={index} selected/>;
+					}
+					else{
+						return <div key={index}></div>
+					}
 				}) : this.renderPlaceHolder()}
 
 			</div>
@@ -40,7 +51,8 @@ class NoteList extends Component {
 function mapStateToProps(state) {
 	return {
 		selectedNoteId: state.note.selectedNoteId,
-		noteList: state.note.noteList
+		noteList: state.note.noteList,
+		note_query  : state.note.note_query
 	};
 }
 

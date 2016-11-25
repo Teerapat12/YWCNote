@@ -4,7 +4,7 @@
     border-right: 2px double #aaaaaa;
 
     padding:7px;
-    height:700px;
+    height:85vh;
     color: #444444;
 }
 
@@ -60,7 +60,7 @@
 
 .notelist{
     color:#444444 !important; /* Not Working*/
-    height:100%;
+    height:80%;
     overflow-y:scroll;
     padding:8px;
 }
@@ -79,7 +79,8 @@
 }
 
 .selectednote{
-    border:3px outset #5260a7;
+
+    border:3px inset #1e57b2;
 }
 .deletebutton{
     margin-bottom:50px;
@@ -102,15 +103,18 @@
 
 .noteTitleText{
     display:inline;
-
+    color:#444444;
+    text-shadow: 2px 2px 3px #dddddd;
+    font-family:roboto;
 }
 
 .placeHolderDiv{
-    /*background-color:rgb(125,125,220);*/
-    background-color:#4d5d9d;
     height:500px;
+    text-align:center;
     margin-right:20px;
     margin-top:25px;
+    padding-top:150px;
+
 }
 
 .savebutton{
@@ -139,3 +143,8 @@
 
 }
 
+
+.noteBody{
+    margin-top:5px;
+    font-size:0.95rem;
+}
