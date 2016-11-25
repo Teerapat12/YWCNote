@@ -12,7 +12,7 @@ import reduxThunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/index';
 import {NOTE_LOAD} from './actions/types';
-
+import { RouteTransition } from 'react-router-transition';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 // var store = createStore(reducers)
 const store = createStoreWithMiddleware(reducers);
@@ -29,6 +29,8 @@ export default class App extends React.Component {
 
 		return (
 			<Provider store={store}>
+
+				
 				<Router history={hashHistory}>
 					<Route path="/" component={DefaultTemplate}>
 						<IndexRoute component={Landing}/>

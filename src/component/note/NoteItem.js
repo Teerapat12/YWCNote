@@ -33,6 +33,8 @@ class NoteItem extends Component {
 
 
 	render() {
+
+
 		var panelClassName = styles.note;
 		if(this.props.selected){
 			panelClassName+=" "+styles.selectednote;
@@ -42,6 +44,14 @@ class NoteItem extends Component {
 		var updatedDate = new Date(updatedDate);
 		var updatedSince = ((new Date()).getTime() - updatedDate.getTime())/1000;
 		var timeString = "";
+		if(updatedSince>3600*24){
+			var days = parseInt(updatedSince/(3600*24));
+			if(days>1){
+				timeString = days+" day ago";
+			}
+			else
+				timeString = days+" days ago";
+		}
 		if(updatedSince > (3600)) { //More than Hour
 			var hour = parseInt(updatedSince / 3600);
 			if(hour>1)
@@ -82,7 +92,7 @@ class NoteItem extends Component {
 				</div>
 				<div className={styles.noteBody}>
 
-					{ noteDetail.length>0? noteDetail.replace(/<\/?[^>]+(>|$)/g, ""): <p className={styles.noteItemPlaceHolder}></p>}
+					{ noteDetail.length>0? noteDetail.replace(/<\/?[^>]+(>|$)/g, "").replace(/&.*;/g,''): <p className={styles.noteItemPlaceHolder}></p>}
 
 				</div>
 

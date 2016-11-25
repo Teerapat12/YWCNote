@@ -1,7 +1,7 @@
 /**
  * Created by Teerapat on 11/22/2016.
  */
-import {NOTE_SELECTED,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_ADD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD,NOTE_SEARCH} from './types';
+import {NOTE_SELECTED,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_ADD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD,NOTE_SEARCH,NOTE_CHANGESORT} from './types';
 
 export function selectNote(id){
 
@@ -83,5 +83,12 @@ export function search_change(query){
 	return{
 		type:NOTE_SEARCH,
 		payload:query
+	}
+}
+
+export function change_sortMode(searchMode){
+	return{
+		type:NOTE_CHANGESORT,
+		payload:searchMode
 	}
 }

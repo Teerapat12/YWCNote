@@ -19,7 +19,7 @@ class NavBar extends Component{
 				<Navbar.Collapse>
 					<Nav>
 						<NavItem eventKey={1} href="#/note">Your Note</NavItem>
-						<NavItem eventKey={2} href="#">Explore Note</NavItem>
+						{/*<NavItem eventKey={2} href="#">Explore Note</NavItem>*/}
 						{/*<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">*/}
 							{/*<MenuItem eventKey={3.1}>Action</MenuItem>*/}
 							{/*<MenuItem eventKey={3.2}>Another action</MenuItem>*/}
@@ -29,10 +29,10 @@ class NavBar extends Component{
 						{/*</NavDropdown>*/}
 					</Nav>
 
-					<Nav pullRight>
-						<NavItem eventKey={1} href="#">Login with Facebook</NavItem>
-						<NavItem eventKey={2} href="#">Login</NavItem>
-					</Nav>
+					{/*<Nav pullRight>*/}
+						{/*<NavItem eventKey={1} href="#">Sign Up</NavItem>*/}
+						{/*<NavItem eventKey={2} href="#">Login</NavItem>*/}
+					{/*</Nav>*/}
 				</Navbar.Collapse>
 				<ModalMenu/>
 			</Navbar>

@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import styles from './landing.css';
+import {Link } from 'react-router';
 
 class Landing extends Component {
 	render() {
@@ -19,13 +20,13 @@ class Landing extends Component {
 									<hr className={styles.introdivider}/>
 									<ul className="list-inline intro-social-buttons">
 										<li>
-											<a href="https://twitter.com/SBootstrap" className="btn btn-default btn-lg"><i className="fa fa-twitter fa-fw"></i> <span className="network-name">Twitter</span></a>
+											<a href="http://ywc14.ywc.in.th/landing" className="btn btn-default btn-lg"><i className="fa fa-twitter fa-fw"></i> <span className="network-name">YWC #14</span></a>
 										</li>
 										<li>
 											<a href="https://github.com/Teerapat12/YWCNote" className="btn btn-default btn-lg"><i className="fa fa-github fa-fw"></i> <span className="network-name">Github</span></a>
 										</li>
 										<li>
-											<a href="#" className="btn btn-default btn-lg"><i className="fa fa-linkedin fa-fw"></i> <span className="network-name">Linkedin</span></a>
+											<a href="http://ywc14.ywc.in.th/landing" className="btn btn-default btn-lg"><span className="network-name">YWC#14 Page</span></a>
 										</li>
 									</ul>
 								</div>

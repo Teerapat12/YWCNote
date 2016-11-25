@@ -1,7 +1,7 @@
 /**
  * Created by Teerapat on 11/22/2016.
  */
-import {NOTE_SELECTED,NOTE_ADD,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_LOAD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD,NOTE_SEARCH} from '../actions/types'
+import {NOTE_SELECTED,NOTE_ADD,NOTE_EDITING,NOTE_SAVE,NOTE_DELETE,NOTE_LOAD,NOTE_EDITTITLE,NOTE_STARTLOAD,NOTE_FINLOAD,NOTE_SEARCH,NOTE_CHANGESORT} from '../actions/types'
 
 const initialState ={
 	selectedNoteId:-1,
@@ -40,10 +40,48 @@ const initialState ={
 		noteDetail:''
 	},
 	loading_note:false,
-	note_query:''
+	note_query:'',
+	sort_mode:'da'
 };
 
+
+
+
+
+
 export default function(state=initialState,action){
+
+
+	function compare(noteA,noteB,mode=state.sort_mode) {
+		var a,b;
+		if(mode=='da') {
+			a = new Date(noteA.createdDate);
+			b = new Date(noteB.createdDate);
+		}
+		else if(mode=='dd'){	  //dd
+				a=new Date(noteB.createdDate);
+				b=new Date(noteA.createdDate);
+
+		}
+		else if(mode=='ua'){ //ua
+				a=new Date(noteB.updatedDate);
+				b=new Date(noteA.updatedDate);
+		}
+		else if(mode=='ud'){ //ud
+				a=new Date(noteA.updatedDate);
+				b=new Date(noteB.updatedDate);
+		}
+		else{
+			return 0;
+		}
+
+		if (a< b)
+			return -1;
+		if (a> b)
+			return 1;
+		return 0;
+	}
+
 	switch(action.type){
 		case NOTE_LOAD:
 			var notes = action.payload;
@@ -74,6 +112,7 @@ export default function(state=initialState,action){
 
 			editingNote.noteDetail = editingDetail;
 			editingNote.updatedDate = new Date();
+			newObj.noteList.sort(compare);
 			localStorage.setItem('notes',JSON.stringify(newObj.noteList));   //SAVE NOTES HERE
 			return newObj;
 
@@ -103,6 +142,7 @@ export default function(state=initialState,action){
 			newObj.noteList.push(newNote);
 			newObj.selectedNoteId = newObj.noteList.length-1;
 			newObj.editingNote = newNote;
+			newObj.noteList.sort(compare);
 			localStorage.setItem('notes',JSON.stringify(newObj.noteList));   //SAVE NOTES HERE
 			return newObj;
 
@@ -126,7 +166,11 @@ export default function(state=initialState,action){
 			var newObj = JSON.parse(JSON.stringify(state));
 			newObj.note_query = action.payload;
 			return newObj;
-
+		case NOTE_CHANGESORT:
+			var newObj = JSON.parse(JSON.stringify(state));
+			newObj.sort_mode = action.payload;
+			newObj.noteList.sort((a,b)=>compare(a,b,action.payload));
+			return newObj;
 		//Set to 'none' instead of '' so that we can avoid loading modal at the start. Reducing loading time
 	}
 
