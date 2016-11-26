@@ -20,7 +20,7 @@ class Landing extends Component {
 									<hr className={styles.introdivider}/>
 									<ul className="list-inline intro-social-buttons">
 										<li>
-											<a href="http://ywc14.ywc.in.th/landing" className="btn btn-default btn-lg"><i className="fa fa-twitter fa-fw"></i> <span className="network-name">YWC #14</span></a>
+											<a href="https://twitter.com/ywcth" className="btn btn-default btn-lg"><i className="fa fa-twitter fa-fw"></i> <span className="network-name">YWC #14</span></a>
 										</li>
 										<li>
 											<a href="https://github.com/Teerapat12/YWCNote" className="btn btn-default btn-lg"><i className="fa fa-github fa-fw"></i> <span className="network-name">Github</span></a>
